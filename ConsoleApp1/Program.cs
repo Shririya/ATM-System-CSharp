@@ -10,6 +10,17 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            int pin = 1234;
+            Console.Write("Please enter your PIN:");
+            if(pin == Convert.ToInt32(Console.ReadLine()))
+            {
+                Console.WriteLine("PIN accepted. Access granted.");
+            }
+            else
+            {
+                Console.WriteLine("Invalid PIN. Access denied.");
+                return;
+            }
             int balance = 1000;
             while (true)
             {
@@ -27,23 +38,39 @@ namespace ConsoleApp1
                         Console.WriteLine("Balance: $" + balance);
                         break;
                     case "2":
-                        Console.Write("Enter amount:");
-                        int amount = Convert.ToInt32(Console.ReadLine());
-                        balance += amount;
-                        Console.WriteLine("Amount deposited: $" + amount);
+                        try
+                        {
+                            Console.Write("Enter amount:");
+                            int amount = Convert.ToInt32(Console.ReadLine());
+                            balance += amount;
+                            Console.WriteLine("Amount deposited: $" + amount);
+                            Console.WriteLine("New balance: $" + balance);
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid amount.");
+                        }
                         break;
                     case "3":
-                        Console.Write("Enter amount:");
-                        int withdrawAmount = Convert.ToInt32(Console.ReadLine());
+                        try
+                        {
+                            Console.Write("Enter amount:");
+                            int withdrawAmount = Convert.ToInt32(Console.ReadLine());
 
-                        if (withdrawAmount > balance)
-                        {
-                            Console.WriteLine("Insufficient funds.");
+                            if (withdrawAmount > balance)
+                            {
+                                Console.WriteLine("Insufficient funds.");
+                            }
+                            else
+                            {
+                                balance -= withdrawAmount;
+                                Console.WriteLine("Amount withdrawn: $" + withdrawAmount);
+                                Console.WriteLine("New balance: $" + balance);
+                            }
                         }
-                        else
+                        catch
                         {
-                            balance -= withdrawAmount;
-                            Console.WriteLine("Amount withdrawn: $" + withdrawAmount);
+                            Console.WriteLine("Invalid input. Please enter a valid amount.");
                         }
                         break;
                     case "4":
